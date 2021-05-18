@@ -1,0 +1,22 @@
+{
+  "name": "html-midle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yudzeshka/html-midle.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yudzeshka/html-midle/issues"
+  },
+  "homepage": "https://github.com/yudzeshka/html-midle#readme",
+  "devDependencies": {
+    "sass": "^1.32.13"
+  }
+}
