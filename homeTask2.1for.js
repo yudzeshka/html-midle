@@ -1,6 +1,8 @@
-for (a=1, b=2, c=3; a<=100, b<=100, c<=100; a++, b++, c++  ){
-const isTriangle = (a, b, c) =>  a + b > c && a + c > b && b + c > a
-
-const answer = isTriangle (a, b, c) ? "можно" : "нельзя";
-const answerPhrase = `на сторонах a= ${a}, b= ${b}, c= ${c} -${answer} построить треугольник`;
-console.log (answerPhrase);}
+for (let a=1; a<=100; a++) {
+    for (let b=1; b<=100; b++) {
+       for (let c=1; c<=100; c++) {
+        function isTriangle (a, b, c) { return a + b > c && a + c > b && b + c > a};
+        if (isTriangle (a, b, c)) console.log (`На сторонах a= ${a}, b= ${b}, c= ${c} -можно построить треугольник`)
+    }
+  }
+}
