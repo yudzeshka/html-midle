@@ -1,23 +1,30 @@
-const a = 18;
+const a = 188;
 const b = 302;
-const c= 21;
-let isValidSide = true;
+const c= 218;
 const lowerBound = 16;
 const upperBound = 74;
 const isBetween = (value, lower, upper) => value >= lower && value <= upper;
 const isValid = (value) => isBetween (value, lowerBound + 1, upperBound);
-if (!isValid (a)) {
-    console.log (`Значение ${a} стороны a не может быть использовано для стороны треугольника`);
-    isValidSide = false;
-}
-if (!isValid (b)) {
-    console.log (`Значение ${b} стороны a не может быть использовано для стороны треугольника`);
-    isValidSide = false;
-}
-if (!isValid (c)) {
-    console.log (`Значение ${c} стороны a не может быть использовано для стороны треугольника`);
-    isValidSide = false;
-}
+
+const getErrorMessage = (sideName, sideLength) => `Значение ${sideLength} стороны ${sideName} не может быть использовано для стороны треугольника`
+
+let isValidSide = true;
+
+const isSideValid = (sideLength, sideName) => {
+    if (!isValid (sideLength)) {
+        console.log (getErrorMessage (sideName, sideLength));
+        return false;
+    }
+    return  true;
+};
+const sides ({sideName : "a" , sideLength : 188}, {sideName : "b" , sideLength : 302}, {sideName : "c" , sideLength : 218});
+for (let i=1; i < sides.Length; i++ )
+
+isValidSide = isSideValid  (a, "a") ,
+isValidSide = isSideValid  (b, "b") ,
+isValidSide = isSideValid  (c, "c") ,
+console.log ()
+
 if (!isValidSide){
     console.log(`Допустимый диапазон значений (${lowerBound}; ${upperBound}]`);
     return;
