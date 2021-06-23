@@ -1,42 +1,62 @@
-const a = 188;
-const b = 302;
-const c= 218;
-const lowerBound = 16;
+const sides = [
+  { sideName: "a", sideLength: -3 },
+  { sideName: "b", sideLength: 400 },
+  { sideName: "c", sideLength: 500 },
+];
+
+const lowerBound = 0;
 const upperBound = 74;
 const isBetween = (value, lower, upper) => value >= lower && value <= upper;
-const isValid = (value) => isBetween (value, lowerBound + 1, upperBound);
+const isValid = (value) => isBetween(value, lowerBound + 1, upperBound);
 
-const getErrorMessage = (sideName, sideLength) => `Значение ${sideLength} стороны ${sideName} не может быть использовано для стороны треугольника`
+const getErrorMessage = (sideName, sideLength) =>
+  `Значение ${sideLength} стороны ${sideName} не может быть использовано для стороны треугольника`;
 
-let isValidSide = true;
+const getHelpText = (lowerBound, upperBound) =>
+  `Допустимый диапазон значений (${lowerBound}, ${upperBound}].`;
 
-const isSideValid = (sideLength, sideName) => {
-    if (!isValid (sideLength)) {
-        console.log (getErrorMessage (sideName, sideLength));
-        return false;
-    }
-    return  true;
+const validateSide = (side) =>
+  isValid(side.sideLength)
+    ? { isValid: true, errorMessage: "" }
+    : {
+        isValid: false,
+        errorMessage: getErrorMessage(side.sideName, side.sideLength),
+      };
+
+const validateTriangle = (sides) => {
+  const validationResults = sides.map((side) => validateSide(side));
+  return {
+    isValid: !validationResults.some((result) => result.isValid === false),
+    errorMessages: validationResults.map((result) => result.errorMessage),
+  };
 };
-const sides ({sideName : "a" , sideLength : 188}, {sideName : "b" , sideLength : 302}, {sideName : "c" , sideLength : 218});
-for (let i=1; i < sides.Length; i++ )
+const validationResult = validateTriangle(sides);
 
-isValidSide = isSideValid  (a, "a") ,
-isValidSide = isSideValid  (b, "b") ,
-isValidSide = isSideValid  (c, "c") ,
-console.log ()
-
-if (!isValidSide){
-    console.log(`Допустимый диапазон значений (${lowerBound}; ${upperBound}]`);
-    return;
+if (!validationResult.isValid) {
+  console.log(validationResult.errorMessages.join("\n"));
+  console.log(getHelpText(lowerBound, upperBound));
+  return;
 }
-// function isTriangle (a, b, c) {
-// const condAbc = a + b > c;
-// const condAcb = a + c > b;
-// const condBca = b + c > a;
-//     return condAbc && condAcb && condBca;
-// }
-const isTriangle = (a, b, c) =>  a + b > c && a + c > b && b + c > a
 
-const answer = isTriangle (a, b, c) ? "можно" : "нельзя";
-const answerPhrase = `на сторонах a= ${a}, b= ${b}, c= ${c} -${answer} построить треугольник`;
-console.log (answerPhrase);
+const isTriangle = (a, b, c) => a + b > c && a + c > b && b + c > a;
+
+const answer = isTriangle(
+  sides[0].sideLength,
+  sides[1].sideLength,
+  sides[2].sideLength
+);
+
+const answerToText = (answer) => (answer ? "можно" : "нельзя");
+
+const sideToText = (side) => `${side.sideName} = ${side.sideLength}`;
+
+const triangleToText = (sides) =>
+  sides.map((side) => sideToText(side)).join(", ");
+
+const getAnswerPhrase = (sides, answer) => {
+  return `на сторонах ${triangleToText(sides)} -${answerToText(
+    answer
+  )} построить треугольник`;
+};
+triangleToText(sides);
+console.log(getAnswerPhrase(sides, answer));
